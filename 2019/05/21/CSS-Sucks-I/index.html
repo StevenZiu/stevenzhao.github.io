@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>CSS box model | Steven's Blog</title><meta name="description" content="The tricky parts of CSS box model"><meta name="generator" content="Steven's Blog"><meta name="author" content="Steven Zhao"><meta name="keywords" content="stevenzhao, web, javascript, nodejs, blog, front end, backend, fullstack, developer"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="160x160" href="/images/favicon-160x160.png"><link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192x192.png"><meta name="msapplication-TileColor" content="#121315"><meta name="msapplication-TileImage" content="/images/mstile-144x144.png"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><a href="/"><img src="/images/svdb.png" alt="Steven's Blog" title="Steven's Blog"></a><h1><a href="/" alt="Steven's Blog" title="Steven's Blog" itemprop="headline">Steven's Blog</a></h1><p itemprop="description">Note on development</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/" alt="Home" title="Home" itemprop="url">Home</a></li><li itemprop="name"><a href="/projects" alt="Projects" title="Projects" itemprop="url">Projects</a></li><li itemprop="name"><a href="/about" alt="About" title="About" itemprop="url">About</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline">CSS box model</h1><span class="post-meta">Published on<time itemprop="datePublished" datetime="2019-05-21T07:21:18.000Z"> Tuesday, May 21st 2019 at 15:21</time><br>Last updated on<time itemprop="dateModified" datetime="2019-05-21T07:21:18.000Z"> Tuesday, May 21st 2019 at 17:09</time></span><p>Every element on the webpage is treated as <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Box_model" target="_blank" rel="noopener">Box</a>, which gives the element some attributes we normally work with in our day to day life (padding, margin, border, height, width). Understanding of box model is the foundation of writing CSS.</p>
+<p>Box model explain:</p>
+<p><img src="/images/box-model-standard-small.png" alt="Box Model" style="width:400px;"></p>
+<p>The <strong>height</strong> and <strong>width</strong> are actually attibutes of the box content which don’t include padding, margin and border width.</p>
+<p><strong>Margin Collapse</strong>: Sometimes, the margins of two boxes might collapse, which is only applied to <strong>vertical margins</strong> (margin-top, margin-bottom).</p>
+<p><strong>Collapse</strong> means the two margins will combine to one, which is larger of the two margin values.</p>
+<p>i. The margin of Two adjacent siblings will collapse to larger one.</p>
+<p><img src="/images/sibling.svg" alt="Box Model" style="width:400px;"></p>
+<p>ii. For empty element, if there is no padding, min-height, height, border attributes set, the margin-top and margin-bottom of this element will collapse</p>
+<p><img src="/images/empty.svg" alt="Box Model" style="width:400px;"></p>
+<p>iii. The margin-top of the element and its first child’s margin-top will collapse, similarly, the margin-bottom of the element and its last child’s margin-bottom will collapse.</p>
+<p>Top:</p>
+<p><img src="/images/child.svg" alt="Box Model" style="width:400px;"></p>
+<p>Bottom:</p>
+<p><img src="/images/child2.svg" alt="Box Model" style="width:400px;"></p>
+<p>For situation 3, if the element has top/bottom border or padding, the margin between itself and its first/last child will not collapse. If the element overflow is not visible, or display is inline-block, or position absolute, float, the margins of itself and its first/last child will not collapse.</p>
+<!--
+<img src="/images/no1.svg" alt="Box Model" style="width:400px;" />
+
+<img src="/images/no2.svg" alt="Box Model" style="width:400px;" />
+
+<img src="/images/no3.svg" alt="Box Model" style="width:400px;" /> -->
+<p>More Resources:</p>
+<p><a href="https://www.jonathan-harrell.com/whats-the-deal-with-margin-collapse/" target="_blank" rel="noopener">Jonathan Explain</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing" target="_blank" rel="noopener">MDN</a></p>
+<p><strong>Type of box</strong>: block, inline, inline-block</p>
+<p>Set by using display attribute.</p>
+<p>The <strong>block</strong> element can use all attributes provide by box model, and which will exhaust the whole width of its parent element by default. Also enforce a line-break between two sibling block elements.</p>
+<p>The <strong>inline</strong> element will effect on left/right margin and all padding, the top/bottom margin will not have effect. Can not have width and height, the height will equal to line-height of the parent element. Element can sit on its right or left. The inline element can wrap to two lines.</p>
+<p>The <strong>inline-block</strong> element will have all block element attributes and not enforce a line-break. Element can sit on its right or left. Inline-block can not wrap to second lines.</p>
+<p>More Resource: <a href="https://stackoverflow.com/questions/9189810/css-display-inline-vs-inline-block" target="_blank" rel="noopener">Stackoverflow</a></p>
+</article></main><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+e.src='//www.google-analytics.com/analytics.js';
+r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+ga('create','UA-106933947-1');ga('send','pageview');</script></body></html>
